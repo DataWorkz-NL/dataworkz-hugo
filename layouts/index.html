@@ -7,17 +7,22 @@
 {{ with $data.homepage.slider }}
 <section class="hero-section overlay bg-cover" data-background="{{ .bg_image | absURL }}">
   <div class="container">
-    <div class="hero-slider">
+    <div class="hero">
       <!-- slider item -->
       {{ range .slider_item }}
-      <div class="hero-slider-item">
+      <div class="hero-item">
         <div class="row">
           <div class="col-md-8">
-            <h1 class="text-white" data-animation-out="fadeOut{{.animation_out | title }}" data-delay-out="5" data-duration-in=".3"
-              data-animation-in="fadeIn{{.animation_in | title }}" data-delay-in=".1">{{ .title | markdownify }}</h1>
-            <p class="text-muted mb-4" data-animation-out="fadeOut{{.animation_out | title }}" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeIn{{.animation_in | title }}" data-delay-in=".4">{{ .content | markdownify }}</p>
+            <h1 class="text-white" data-animation-out="fadeOut{{.animation_out | title }}" data-delay-out="5"
+              data-duration-in=".3" data-animation-in="fadeIn{{.animation_in | title }}" data-delay-in=".1">
+              {{ .title | markdownify }}</h1>
+            <p class="text-muted mb-4" data-animation-out="fadeOut{{.animation_out | title }}" data-delay-out="5"
+              data-duration-in=".3" data-animation-in="fadeIn{{.animation_in | title }}" data-delay-in=".4">
+              {{ .content | markdownify }}</p>
             {{ if .button.enable }}
-            <a href="{{ .button.link | absLangURL }}" class="btn btn-primary" data-animation-out="fadeOut{{.animation_out | title }}" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeIn{{.animation_in | title }}" data-delay-in=".7">{{ .button.label }}</a>
+            <a href="{{ .button.link | absLangURL }}" class="btn btn-primary"
+              data-animation-out="fadeOut{{.animation_out | title }}" data-delay-out="5" data-duration-in=".3"
+              data-animation-in="fadeIn{{.animation_in | title }}" data-delay-in=".7">{{ .button.label }}</a>
             {{ end }}
           </div>
         </div>
@@ -42,10 +47,15 @@
       <div class="col-xl-8 col-lg-7">
         <div class="row feature-blocks bg-gray justify-content-between">
           {{ range .feature_item }}
-          <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+          <div class="col-sm-12 col-xl-12 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
             <i class="{{ .icon }} mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
             <h3 class="mb-xl-4 mb-lg-3 mb-4">{{ .name | markdownify }}</h3>
             <p>{{ .content | markdownify }}</p>
+            {{ if .button.enable }}
+            <a href="{{ .button.link  }}" class="btn btn-primary"
+              data-animation-out="fadeOut{{.animation_out | title }}" data-delay-out="5" data-duration-in=".3"
+              data-animation-in="fadeIn{{.animation_in | title }}" data-delay-in=".7">{{ .button.label }}</a>
+            {{ end }}
           </div>
           {{ end }}
         </div>
@@ -68,7 +78,7 @@
         <p>{{ .content | markdownify }}</p>
         {{ if .button.enable }}
         {{ with .button }}
-        <a href="{{ .link | absLangURL }}" class="btn btn-outline-primary">{{ .label }}</a>
+        <a href="{{ .link | absLangURL }}" class="btn btn-primary-outline">{{ .label }}</a>
         {{ end }}
         {{ end }}
       </div>
@@ -94,7 +104,8 @@
           <h2 class="mb-0 text-nowrap mr-3">{{ $data.homepage.course.title }}</h2>
           <div class="border-top w-100 border-primary d-none d-sm-block"></div>
           <div>
-            <a href="{{ `course` | relLangURL }}" class="btn btn-sm btn-outline-primary ml-sm-3 d-none d-sm-block">{{ i18n "see_all" }}</a>
+            <a href="{{ `course` | relLangURL }}"
+              class="btn btn-sm btn-primary-outline ml-sm-3 d-none d-sm-block">{{ i18n "see_all" }}</a>
           </div>
         </div>
       </div>
@@ -112,7 +123,8 @@
     <!-- mobile see all button -->
     <div class="row">
       <div class="col-12 text-center">
-        <a href="{{ `course` | relLangURL }}" class="btn btn-sm btn-outline-primary d-sm-none d-inline-block">{{ i18n "see_all" }}</a>
+        <a href="{{ `course` | relLangURL }}"
+          class="btn btn-sm btn-primary-outline d-sm-none d-inline-block">{{ i18n "see_all" }}</a>
       </div>
     </div>
   </div>
@@ -129,9 +141,16 @@
       <div class="col-12 text-center">
         <h6 class="text-white font-secondary mb-0">{{ .subtitle | markdownify }}</h6>
         <h2 class="section-title text-white">{{ .title | markdownify }}</h2>
+        <div class="owl-carousel">
+          {{ range (where site.RegularPages "Type" "customers")}}
+          <div class="item mb-4">
+            <img class="img-fluid w-80" src="{{ .Params.Image | absURL }}" />
+          </div>
+          {{ end }}
+        </div>
         {{ if .button.enable }}
         {{ with .button }}
-        <a href="{{ .link | absLangURL }}" class="btn btn-light">{{ .label }}</a>
+        <a href="{{ .link | absLangURL }}" class="btn btn-secondary">{{ .label }}</a>
         {{ end }}
         {{ end }}
       </div>
@@ -158,14 +177,20 @@
           <h2 class="mb-0 text-nowrap mr-3">{{ $data.homepage.event.title }}</h2>
           <div class="border-top w-100 border-primary d-none d-sm-block"></div>
           <div>
-            <a href="{{`event` | relLangURL }}" class="btn btn-sm btn-outline-primary ml-sm-3 d-none d-sm-block text-nowrap">{{ i18n "see_all" }}</a>
+            <a href="{{`event` | relLangURL }}"
+              class="btn btn-sm btn-primary-outline ml-sm-3 d-none d-sm-block text-nowrap">{{ i18n "see_all" }}</a>
           </div>
         </div>
       </div>
     </div>
     <div class="row justify-content-center">
+      {{ $events := where site.RegularPages "Type" "event" }}
+      {{ $events := $events | intersect (where $events "Date" "ge" now) }}
+      {{ if and (lt (len ($events)) 1)  }}
+      <p>Er zijn nog geen events gepland, houd de site in de gaten!</p>
+      {{ end }}
       <!-- event -->
-      {{ range first 3 (where site.RegularPages "Type" "event")}}
+      {{ range first 3 ($events)}}
       <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
         {{ .Render "event" }}
       </div>
@@ -174,13 +199,43 @@
     <!-- mobile see all button -->
     <div class="row">
       <div class="col-12 text-center">
-        <a href="{{`event` | relLangURL }}" class="btn btn-sm btn-outline-primary d-sm-none d-inline-block">{{ i18n "see_all" }}</a>
+        <a href="{{`event` | relLangURL }}"
+          class="btn btn-sm btn-primary-outline d-sm-none d-inline-block">{{ i18n "see_all" }}</a>
       </div>
     </div>
   </div>
 </section>
 {{ end }}
 <!-- /events -->
+
+<!-- tech -->
+{{ if $data.homepage.tech.enable }}
+{{ with $data.homepage.tech }}
+<section class="section bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h6 class="text-white font-secondary mb-0">{{ .subtitle | markdownify }}</h6>
+        <h2 class="section-title text-white">{{ .title | markdownify }}</h2>
+        <div class="owl-carousel">
+          {{ range (where site.RegularPages "Type" "tech")}}
+          <div class="item mb-4">
+            <img class="img-fluid w-80" src="{{ .Params.Image | absURL }}" />
+          </div>
+          {{ end }}
+        </div>
+        {{ if .button.enable }}
+        {{ with .button }}
+        <a href="{{ .link | absLangURL }}" class="btn btn-secondary">{{ .label }}</a>
+        {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+<!-- /tech -->
 
 <!-- blog -->
 {{ if $data.homepage.blog.enable }}
@@ -192,6 +247,10 @@
       </div>
     </div>
     <div class="row justify-content-center">
+      {{ $blogs := where site.RegularPages "Type" "post" }}
+      {{ if and (lt (len ($blogs)) 1)  }}
+      <p>Er zijn nog geen blogs gepost, we zijn hiermee hard aan het werk!</p>
+      {{ end }}
       <!-- blog post -->
       {{ range first 3 (where site.RegularPages "Type" "post")}}
       <article class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
